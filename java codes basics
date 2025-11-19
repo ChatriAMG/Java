@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+public class learning {
+    public static void main(String[] args) {
+   /*  int numero = 123;
+    System.out.println("el numero es: " + numero);
+
+    String Mauricio = "Mauricio chupa pinga";
+    System.out.println(Mauricio);
+
+        boolean desicion = false;
+        System.out.println("la desicion es: " + desicion);
+
+        Integer number = null;
+        number = 10;
+        System.out.println(number);
+*/
+/* 
+    Scanner entrada = new Scanner(System.in);
+        double numero;
+    System.out.println("escribe un numero: ");
+    numero = entrada.nextDouble();        
+        System.out.println("el numero es: " + numero);
+*/
+Scanner entrada = new Scanner(System.in);
+
+    char letra;
+        System.out.println("digite una cadena: ");
+        letra = entrada.next().charAt(2);
+
+        System.out.println("la cadena es: " + letra);
+       
+
+    }
+}
+
+/*variables
+
+primitivos:
+
+byte
+short
+int
+long
+
+float 
+double
+
+char
+String
+
+boolean
+
+
+no primitivos:
+integer = null
+
+constante:
+final
+
+
+input usuario:
+Scanner entrada = new Scanner(System.in);
+numero = entrada.nextInt();     
+
+para texto: entrada.next(); 
+texto con mas largo con espacios: entrada.nextLine();
+
+para un solo caracter: entrada.next().charAt(0);
+
+int normal
+float: no coma, usa punto
+
+*/
