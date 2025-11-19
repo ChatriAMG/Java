@@ -1,0 +1,24 @@
+import javax.swing.JOptionPane;
+
+public class mocoso {
+
+    public static void main(String[] args) {
+        String cadena;
+        int numero;
+        char letra;
+        double decimal;
+
+        cadena = JOptionPane.showInputDialog("digita mi huevo: ");
+        numero = Integer.parseInt(JOptionPane.showInputDialog("digita tu edad:"));
+        decimal = Double.parseDouble(JOptionPane.showInputDialog("digita tu altura: "));
+        letra  = JOptionPane.showInputDialog("digita una letra: ").charAt(0);
+
+
+            System.out.println(cadena);
+            System.out.println(numero);
+            System.out.println(decimal);
+            System.out.println(letra);
+
+
+    }
+}
