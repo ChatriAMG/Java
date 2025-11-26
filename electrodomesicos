@@ -1,0 +1,74 @@
+package Electrodomestico;
+
+public class CElectrodomestico {
+    private static final double PRECIO_DEFAULT = 100;
+    private static final String COLOR_DEFAULT = "Blanco";
+    private static final char CONSUMO_DEFAULT = 'C';
+    private static final double PESO_DEFAULT = 5;
+
+    double precio;
+    String color;
+    char consumoEnergetico;
+    double peso;
+
+    public CElectrodomestico() {
+        this.precio = PRECIO_DEFAULT;
+        this.color = COLOR_DEFAULT;
+        this.consumoEnergetico = CONSUMO_DEFAULT;
+        this.peso = PESO_DEFAULT;
+    }
+    public CElectrodomestico(double _precio, double _peso) {
+        this.precio = _precio;
+        this.peso = _peso;
+        this.color = COLOR_DEFAULT;
+        this.consumoEnergetico = CONSUMO_DEFAULT;
+    }
+    public CElectrodomestico(double _precio, double _peso, String _color, char _consumoEnergetico) {
+        this.precio = _precio;
+        this.peso = _peso;
+        this.color = _color;
+        this.consumoEnergetico = _consumoEnergetico;
+        comprobarConsumoEnergetico(this.consumoEnergetico);
+    }
+    public double getPrecio() {
+        return precio;
+    }
+    public String getColor() {
+        return color;
+    }
+    public char getConsumoEnergetico() {
+        return consumoEnergetico;
+    }
+    public double getPeso() {
+        return peso;
+    }
+    public void comprobarConsumoEnergetico(char a) {
+        if (a != 'A' && a != 'B' && a != 'C' && a != 'D' && a != 'E' && a != 'F') {
+            consumoEnergetico = CONSUMO_DEFAULT;
+        }
+    }
+    public void comprobarColor(String C) {
+        if (!C.matches("(?i)(Blanco|Rojo|Azul|Gris|Negro)")) {
+            color = COLOR_DEFAULT;
+        }
+    }
+    public double precioFinal() {
+        double pF = precio;
+        switch (consumoEnergetico) {
+            case 'A': pF += 100; break;
+            case 'B': pF += 80; break;
+            case 'C': pF += 60; break;
+            case 'D': pF += 50; break;
+            case 'E': pF += 30; break;
+            case 'F': pF += 10; break;
+        }
+        if (peso >= 0 && peso <= 19) {
+            pF += 10;
+        }
+        if (peso >= 20 && peso <= 40) {
+            pF += 50:
+        }
+        if (peso >= 20 && peso <= 40) {
+            pF += 50:
+    }
+}
