@@ -1,0 +1,162 @@
+the main is separated from classes, all classes are separated.
+
+
+// main:
+
+package Electrodomestico;
+
+public class Main {
+    public static void main (String[] args) {
+        CElectrodomestico E1 = new CElectrodomestico();
+        E1.mostrarInfo();
+        CElectrodomestico E2 = new CElectrodomestico(16, 29);
+        E2.mostrarInfo();
+        CElectrodomestico E3 = new CElectrodomestico(48, 50, "gris", 'D');
+        E3.mostrarInfo();
+        CLavadora L1 = new CLavadora();
+        L1.mostrarInfo();
+
+        System.out.println("precio final: "+L1.precioFinal());
+    }
+}
+
+// CElectrodomestico:
+
+package Electrodomestico;
+
+public class CElectrodomestico {
+    private static final double PRECIO_DEFAULT = 100;
+    private static final String COLOR_DEFAULT = "Blanco";
+    private static final char CONSUMO_DEFAULT = 'C';
+    private static final double PESO_DEFAULT = 5;
+
+    double precio;
+    String color;
+    char consumoEnergetico;
+    double peso;
+
+    public CElectrodomestico() {
+        this.precio = PRECIO_DEFAULT;
+        this.color = COLOR_DEFAULT;
+        this.consumoEnergetico = CONSUMO_DEFAULT;
+        this.peso = PESO_DEFAULT;
+    }
+    public CElectrodomestico(double _precio, double _peso) {
+        this.precio = _precio;
+        this.peso = _peso;
+        this.color = COLOR_DEFAULT;
+        this.consumoEnergetico = CONSUMO_DEFAULT;
+    }
+    public CElectrodomestico(double _precio, double _peso, String _color, char _consumoEnergetico) {
+        this.precio = _precio;
+        this.peso = _peso;
+        this.color = _color;
+        this.consumoEnergetico = _consumoEnergetico;
+        comprobarConsumoEnergetico(this.consumoEnergetico);
+
+        comprobarColor(this.color);
+    }
+    public double getPrecio() {
+        return precio;
+    }
+    public String getColor() {
+        return color;
+    }
+    public char getConsumoEnergetico() {
+        return consumoEnergetico;
+    }
+    public double getPeso() {
+        return peso;
+    }
+    public void comprobarConsumoEnergetico(char a) {
+        if (a != 'A' && a != 'B' && a != 'C' && a != 'D' && a != 'E' && a != 'F') {
+            consumoEnergetico = CONSUMO_DEFAULT;
+        }
+    }
+    public void comprobarColor(String C) {
+        if (!C.matches("(?i)(Blanco|Rojo|Azul|Gris|Negro|Amarillo|Rosado|morado|vino)")) {
+            color = COLOR_DEFAULT;
+        }
+    }
+    public double precioFinal() {
+        double pF = precio;
+        switch (consumoEnergetico) {
+            case 'A': pF += 100; break;
+            case 'B': pF += 80; break;
+            case 'C': pF += 60; break;
+            case 'D': pF += 50; break;
+            case 'E': pF += 30; break;
+            case 'F': pF += 10; break;
+        }
+        if (peso >= 0 && peso <= 19) {
+            pF += 10;
+        } else if (peso >= 20 && peso <= 49) {
+            pF += 50;
+        } else if (peso >= 50 && peso <= 79) {
+            pF += 50;
+        } else if (peso > 80) {
+            pF += 100;
+        }
+        return pF;
+    }
+
+    @Override
+    public String toString() {
+        return "CElectrodomestico{" +
+                "precio=" + precio +
+                ", color='" + color + '\'' +
+                ", consumoEnergetico=" + consumoEnergetico +
+                ", peso=" + peso +
+                '}';
+    }
+    public void mostrarInfo() {
+        System.out.println("Precio: "+getPrecio());
+        System.out.println("Color: "+getColor());
+        System.out.println("Consumo energetico: "+getConsumoEnergetico());
+        System.out.println("peso: "+getPeso());
+
+        System.out.println();
+    }
+
+}
+
+
+// CLavadora:
+
+package Electrodomestico;
+
+import java.security.PublicKey;
+
+public class CLavadora extends CElectrodomestico{
+    private static final double CARGA_DEFAULT = 5;
+
+    double carga;
+
+    public CLavadora () {
+        super();
+        this.carga = CARGA_DEFAULT;
+    }
+    public CLavadora (double _precio, double _peso) {
+        super(_precio, _peso);
+        this.carga = CARGA_DEFAULT;
+    }
+    public CLavadora (double _precio, double _peso, String _color, char _consumoEnergetico, double _carga) {
+        super(_precio, _peso, _color, _consumoEnergetico);
+        this.carga = _carga;
+    }
+    public double getCarga() {
+        return carga;
+    }
+    @Override
+    public double precioFinal() {
+        double pF = super.precioFinal();
+        if(carga > 30){
+            pF += 50;
+        } return pF;
+    }
+    public void mostrarInfo() {
+        super.mostrarInfo();
+        System.out.println("carga: "+getCarga());
+    }
+
+}
