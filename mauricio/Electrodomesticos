@@ -9,12 +9,21 @@ public class Main {
     public static void main (String[] args) {
         CElectrodomestico E1 = new CElectrodomestico();
         E1.mostrarInfo();
+        System.out.println();
         CElectrodomestico E2 = new CElectrodomestico(16, 29);
         E2.mostrarInfo();
-        CElectrodomestico E3 = new CElectrodomestico(48, 50, "gris", 'D');
+        System.out.println();
+        CElectrodomestico E3 = new CElectrodomestico(48, 50, "gris", 'D', 2);
         E3.mostrarInfo();
+        System.out.println();
         CLavadora L1 = new CLavadora();
         L1.mostrarInfo();
+        System.out.println();
+        CTelevisor T1 = new CTelevisor();
+        T1.mostrarInfo();
+        System.out.println();
+
+
 
         System.out.println("precio final: "+L1.precioFinal());
     }
@@ -29,32 +38,48 @@ public class CElectrodomestico {
     private static final String COLOR_DEFAULT = "Blanco";
     private static final char CONSUMO_DEFAULT = 'C';
     private static final double PESO_DEFAULT = 5;
+    private static final int EfTERMICA_DEFAULT = 5;
 
     double precio;
     String color;
     char consumoEnergetico;
     double peso;
+    int EfTermica;
 
     public CElectrodomestico() {
         this.precio = PRECIO_DEFAULT;
         this.color = COLOR_DEFAULT;
         this.consumoEnergetico = CONSUMO_DEFAULT;
         this.peso = PESO_DEFAULT;
+        this.EfTermica = EfTERMICA_DEFAULT;
+
+        comprobarConsumoEnergetico(this.consumoEnergetico);
+
+        comprobarColor(this.color);
+        comprobarEfTermica((int) this.EfTermica);
     }
     public CElectrodomestico(double _precio, double _peso) {
         this.precio = _precio;
         this.peso = _peso;
         this.color = COLOR_DEFAULT;
         this.consumoEnergetico = CONSUMO_DEFAULT;
+        this.EfTermica = EfTERMICA_DEFAULT;
+
+        comprobarConsumoEnergetico(this.consumoEnergetico);
+
+        comprobarColor(this.color);
+        comprobarEfTermica((int) this.EfTermica);
     }
-    public CElectrodomestico(double _precio, double _peso, String _color, char _consumoEnergetico) {
+    public CElectrodomestico(double _precio, double _peso, String _color, char _consumoEnergetico, int _EfTermica) {
         this.precio = _precio;
         this.peso = _peso;
         this.color = _color;
         this.consumoEnergetico = _consumoEnergetico;
+        this.EfTermica = _EfTermica;
         comprobarConsumoEnergetico(this.consumoEnergetico);
 
         comprobarColor(this.color);
+        comprobarEfTermica((int) this.EfTermica);
     }
     public double getPrecio() {
         return precio;
@@ -67,6 +92,24 @@ public class CElectrodomestico {
     }
     public double getPeso() {
         return peso;
+    }
+    public int getEfTermica() {
+        return EfTermica;
+    }
+    public void comprobarEfTermica (int e) {
+        if(e > 10 || e < 1) {
+            EfTermica = EfTERMICA_DEFAULT;
+        }
+
+        if(e >= 1 && e <= 3) {
+            precio += 40;
+        } else if (e >= 4 && e <= 6){
+            precio+=20;
+        } else if (e >= 7 && e <= 9){
+            precio+=10;
+        } else if(e == 10){
+            precio+=5;
+        }
     }
     public void comprobarConsumoEnergetico(char a) {
         if (a != 'A' && a != 'B' && a != 'C' && a != 'D' && a != 'E' && a != 'F') {
@@ -106,7 +149,7 @@ public class CElectrodomestico {
                 "precio=" + precio +
                 ", color='" + color + '\'' +
                 ", consumoEnergetico=" + consumoEnergetico +
-                ", peso=" + peso +
+                ", peso=" + peso + "EfTermica=" + EfTermica +
                 '}';
     }
     public void mostrarInfo() {
@@ -114,8 +157,7 @@ public class CElectrodomestico {
         System.out.println("Color: "+getColor());
         System.out.println("Consumo energetico: "+getConsumoEnergetico());
         System.out.println("peso: "+getPeso());
-
-        System.out.println();
+        System.out.println("Eficiencia Termica: " + getEfTermica());
     }
 
 }
@@ -140,8 +182,8 @@ public class CLavadora extends CElectrodomestico{
         super(_precio, _peso);
         this.carga = CARGA_DEFAULT;
     }
-    public CLavadora (double _precio, double _peso, String _color, char _consumoEnergetico, double _carga) {
-        super(_precio, _peso, _color, _consumoEnergetico);
+    public CLavadora (double _precio, double _peso, String _color, char _consumoEnergetico, double _carga, int _EfTermica) {
+        super(_precio, _peso, _color, _consumoEnergetico, _EfTermica);
         this.carga = _carga;
     }
     public double getCarga() {
@@ -160,3 +202,58 @@ public class CLavadora extends CElectrodomestico{
     }
 
 }
+
+// CTelevisor
+
+package Electrodomestico;
+
+import java.security.PublicKey;
+
+public class CTelevisor extends CElectrodomestico{
+    public static final int PULGADAS_DEFAULT = 20;
+    public static final boolean TDT_DEFAULT = false;
+
+    int pulgadas;
+    boolean TDT;
+    public CTelevisor () {
+        super ();
+        this.pulgadas = PULGADAS_DEFAULT;
+        this.TDT = TDT_DEFAULT;
+    }
+    public CTelevisor(double _precio, double _peso) {
+        super(_precio, _peso);
+        this.pulgadas = PULGADAS_DEFAULT;
+        this.TDT = TDT_DEFAULT;
+    }
+    public CTelevisor(double _precio, double _peso, String _color, char _consumoEnergetico, int _pulgadas, int _EfTermica, boolean _TDT) {
+        super(_precio, _peso, _color, _consumoEnergetico, _EfTermica);
+        this.pulgadas = _pulgadas;
+        this.TDT = _TDT;
+    }
+    public int getPulgadas () {
+        return pulgadas;
+    }
+    public boolean getTDT () {
+        return TDT;
+    }
+    @Override
+    public double precioFinal() {
+        double pF = super.precioFinal();
+        if(pulgadas >= 40){
+            pF += pF * 0.30;
+        }
+        if (TDT) {
+            pF += 50;
+        }
+        return pF;
+    }
+    public void mostrarInfo() {
+        super.mostrarInfo();
+        System.out.println("pulgadas: "+getPulgadas());
+        System.out.println("TDT: "+getTDT());
+    }
+}
+
+
+// > 40° = + 30%
+// TDT = true || pF + 50
